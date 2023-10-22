@@ -6,6 +6,11 @@ The project is made for fun and to learn about emulation, it is not intended to 
 
 Game ROM and sounds are not included.
 
+# Screenshots
+![Screenshot 2023-10-22 183746](https://github.com/Odiob/project-scEMU/assets/49337664/1be0d794-36f4-4613-b9c8-b26cf224bb18) ![Screenshot 2023-10-22 183946](https://github.com/Odiob/project-scEMU/assets/49337664/b6c64b28-e886-4c8b-b0ff-eb32a9b536a8)
+
+
+
 # Input
 | Player 1  |  |
 | ------------- | ------------- |
