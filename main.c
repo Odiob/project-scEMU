@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
 	unsigned char *buffer = malloc(size);
 	if(fread(buffer, size, 1, f) != 1)
 	{
-		printf("ERROR: impossible to read the whole binaary");
+		printf("ERROR: impossible to read the whole binary");
 		exit(1);
 	}
 
