@@ -4,8 +4,8 @@
 #include "hshifter.h"
 #include <SDL2/SDL_video.h>
 
-#define DEBUG                                                                  \
-  0 // 0 = no debug, 1 = instruction log (too slow to be used at the moment)
+// 0 = no debug, 1 = instruction log (too slow to be used at the moment)
+#define DEBUG 0
 
 int main(int argc, char *argv[]) {
   // FILE READ
@@ -101,7 +101,6 @@ int main(int argc, char *argv[]) {
   SDL_AudioDeviceID deviceId[10];
 
   uint8_t i;
-  i = 0;
   uint64_t time, last_int, audio_delay[10];
   last_int = SDL_GetTicks64();
 
