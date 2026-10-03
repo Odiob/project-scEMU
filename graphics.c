@@ -1,6 +1,4 @@
 #include "graphics.h"
-#include <include/SDL2/SDL.h>
-#include <stdint.h>
 
 void ConvertBPP(uint8_t *one_bpp, uint8_t *eight_bpp) {
   int i, j;

@@ -1,7 +1,4 @@
 #include "emulator8080.h"
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 void InitEmulator(int d, unsigned char *buffer, State *state, Ports *ports) {
   state->mem = malloc(64000);

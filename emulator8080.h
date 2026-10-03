@@ -1,3 +1,7 @@
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 struct Flags {
   uint8_t s : 1;
   uint8_t z : 1;

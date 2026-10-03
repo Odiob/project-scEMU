@@ -1,8 +1,5 @@
-#include "hshifter.h"
 #include "emulator8080.h"
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "hshifter.h"
 
 void Shift(Shifter *state, Ports *ports) {
   if (ports->out_activation[4] != 0) {

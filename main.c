@@ -2,10 +2,7 @@
 #include "emulator8080.h"
 #include "graphics.h"
 #include "hshifter.h"
-#include <SDL2/SDL.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <SDL2/SDL_video.h>
 
 #define DEBUG                                                                  \
   0 // 0 = no debug, 1 = instruction log (too slow to be used at the moment)
@@ -56,11 +53,13 @@ int main(int argc, char *argv[]) {
   }
 
   SDL_Window *window = SDL_CreateWindow("project-scemu", SDL_WINDOWPOS_CENTERED,
-                                        SDL_WINDOWPOS_CENTERED, 224, 256, 0);
+                                        SDL_WINDOWPOS_CENTERED, 224 * 3,
+                                        256 * 3, SDL_WINDOW_RESIZABLE);
   if (!window) {
     printf("Failed to create window\n");
     exit(1);
   }
+  SDL_SetWindowMinimumSize(window, 224, 256);
 
   uint8_t keep_window_open = 1;
   SDL_Event e;
@@ -121,6 +120,11 @@ int main(int argc, char *argv[]) {
       switch (e.type) {
       case SDL_QUIT:
         keep_window_open = 0;
+        break;
+      case SDL_WINDOWEVENT:
+        if (e.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
+          window_surface = SDL_GetWindowSurface(window);
+        }
         break;
       case SDL_KEYDOWN:
         switch (e.key.keysym.sym) {
@@ -239,7 +243,23 @@ int main(int argc, char *argv[]) {
       } else {
         ConvertBPP(&status->mem[9216], vbuffer);
         Rotate90(vbuffer);
-        SDL_BlitSurface(render_surface, NULL, window_surface, NULL);
+        int window_width;
+        int window_height;
+        SDL_GetWindowSize(window, &window_width, &window_height);
+        int scale_x = window_width / 224;
+        int scale_y = window_height / 256;
+        int scale = scale_x < scale_y ? scale_x : scale_y;
+        int render_width = 224 * scale;
+        int render_height = 256 * scale;
+        SDL_Rect dst = {(window_width - render_width) / 2,
+                        (window_height - render_height) / 2, render_width,
+                        render_height};
+        /* Clear the area around the game when the aspect ratio doesn't match.
+         */
+        SDL_FillRect(window_surface, NULL,
+                     SDL_MapRGB(window_surface->format, 0, 0, 0));
+        SDL_BlitScaled(render_surface, NULL, window_surface, &dst);
+        // SDL_BlitSurface(render_surface, NULL, window_surface, NULL);
         SDL_UpdateWindowSurface(window);
         GenerateInterrupt(status, 2);
         last_int = time;
