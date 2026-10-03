@@ -2,7 +2,7 @@
 
 Basic Intel 8080 emulator for Space Invaders written in C.
 
-The project is made for fun and to learn about emulation, it is not intended to be a fully functional and mature emulator. As such, it is likely to have bugs and issues. From my testing on Windows 11 the game plays quite well at this stage, although the audio is still a bit buggy.
+The project is made for fun and to learn about emulation, it is not intended to be a fully functional and mature emulator. As such, it is likely to have bugs and issues. The game plays quite well at this stage, although the audio is still a bit buggy. Tested both on Windows 11 and Ubuntu 26.04.
 
 Game ROM and sounds are not included.
 
@@ -28,6 +28,5 @@ Game ROM and sounds are not included.
 | Shoot | RShift  |
 
 
-# Compilation requirements
- - GCC 13.2.0
- - SDL2 2.28.4
+# Dependencies
+ - SDL2
